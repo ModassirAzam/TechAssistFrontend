@@ -5,6 +5,8 @@ import { updateToken } from "../redux/user/userSlice";
 
 
 const Login = () => {
+  const API_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL_LOCAL;
+
   const navigate = useNavigate();
   const [formData,setFormData] = useState({});
 
@@ -24,7 +26,7 @@ const Login = () => {
     // console.log(formData);
     e.preventDefault();
     try{
-      const res = await fetch('http://localhost:3001/api/auth/signin',{
+      const res = await fetch(`${API_URL}/api/auth/signin`,{
         method: 'POST',
         headers: {
           'Content-type':'application/json',

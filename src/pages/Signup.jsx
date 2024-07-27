@@ -10,6 +10,7 @@ const initialValues = {
 };
 
 const Signup = () => {
+  const API_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL_LOCAL;
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
@@ -32,7 +33,7 @@ const Signup = () => {
     }
     setIsSubmit(true);
     try {
-      const res = await fetch("http://localhost:3001/api/auth/signup", {
+      const res = await fetch(`${API_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

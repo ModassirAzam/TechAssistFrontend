@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
 
 const Profile = () => {
+  const API_URL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL_LOCAL;
+
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -23,11 +25,10 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
-  console.log("decoded: ", decoded);
 
   const fetchMyData = () => {
     axios
-      .get(`http://localhost:3001/api/user/${decoded.id}`, {
+      .get(`${API_URL}/api/user/${decoded.id}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
